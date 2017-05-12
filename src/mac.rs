@@ -8,7 +8,7 @@
  * The mac module defines the Message Authentication Code (Mac) trait.
  */
 
-use util::fixed_time_eq;
+use util::slice_eq;
 
 /**
  * The Mac trait defines methods for a Message Authentication function.
@@ -85,7 +85,7 @@ impl PartialEq for MacResult {
     fn eq(&self, x: &MacResult) -> bool {
         let lhs = self.code();
         let rhs = x.code();
-        fixed_time_eq(lhs, rhs)
+        slice_eq(lhs, rhs)
     }
 }
 

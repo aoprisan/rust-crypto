@@ -53,6 +53,29 @@ pub fn fixed_time_eq(lhs: &[u8], rhs: &[u8]) -> bool {
         }
     }
 }
+/// Compare two vectors, non-asm version
+pub fn non_asm_eq(lhs: &[u8], rhs: &[u8]) -> bool {
+    if lhs.len() != rhs.len() {
+        false
+    } else {
+
+        for (l,r) in lhs.iter().zip(rhs.iter()) {
+            if l != r { return false; }
+        }
+
+        return true;
+    }
+}
+
+#[cfg(feature = "with-asm")]
+pub fn slice_eq(lhs: &[u8], rhs: &[u8]) -> bool {
+    fixed_time_eq(lhs, rhs)
+}
+
+#[cfg(not(feature = "with-asm"))]
+pub fn slice_eq(lhs: &[u8], rhs: &[u8]) -> bool {
+    non_asm_eq(lhs, rhs)
+}
 
 #[cfg(test)]
 mod test {

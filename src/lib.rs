@@ -41,11 +41,11 @@ pub mod fortuna;
 #[cfg(feature = "with-asm")]
 pub mod ghash;
 pub mod hc128;
-#[cfg(feature = "with-asm")]
+//#[cfg(feature = "with-asm")]
 pub mod hmac;
 #[cfg(feature = "with-asm")]
 pub mod hkdf;
-#[cfg(feature = "with-asm")]
+//#[cfg(feature = "with-asm")]
 pub mod mac;
 pub mod md5;
 #[cfg(feature = "with-asm")]
