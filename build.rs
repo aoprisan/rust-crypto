@@ -10,7 +10,7 @@ use std::env;
 use std::path::Path;
 
 fn main() {
-    if env::var("CARGO_FEATURE_WITH_ASM").is_ok() {
+    /*if env::var("CARGO_FEATURE_WITH_ASM").is_ok() {
         let target = env::var("TARGET").unwrap();
         let host = env::var("HOST").unwrap();
         if target.contains("msvc") && host.contains("windows") {
@@ -39,4 +39,5 @@ fn main() {
             cfg.compile("lib_rust_crypto_helpers.a");
         }
     }
+    */
 }
