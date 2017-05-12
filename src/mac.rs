@@ -8,11 +8,13 @@
  * The mac module defines the Message Authentication Code (Mac) trait.
  */
 
-use util::slice_eq;
-
 /**
  * The Mac trait defines methods for a Message Authentication function.
  */
+
+#[cfg(feature = "with-asm")]
+use util::fixed_time_eq;
+
 pub trait Mac {
     /**
      * Process input data.
@@ -79,6 +81,30 @@ impl MacResult {
     pub fn code<'s>(&'s self) -> &'s [u8] {
         &self.code[..]
     }
+}
+
+#[cfg(feature = "with-asm")]
+pub fn slice_eq(lhs: &[u8], rhs: &[u8]) -> bool {
+    fixed_time_eq(lhs, rhs)
+}
+
+/// Compare two vectors, non-asm version
+pub fn non_asm_eq(lhs: &[u8], rhs: &[u8]) -> bool {
+    if lhs.len() != rhs.len() {
+        false
+    } else {
+
+        for (l,r) in lhs.iter().zip(rhs.iter()) {
+            if l != r { return false; }
+        }
+
+        return true;
+    }
+}
+
+#[cfg(not(feature = "with-asm"))]
+pub fn slice_eq(lhs: &[u8], rhs: &[u8]) -> bool {
+    non_asm_eq(lhs, rhs)
 }
 
 impl PartialEq for MacResult {
