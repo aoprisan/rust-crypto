@@ -14,7 +14,7 @@ build = "build.rs"
 name = "crypto"
 
 [features]
-default = ["with-asm"]
+default = []
 with-bench = []
 with-asm = []
 
